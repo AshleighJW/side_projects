@@ -37,13 +37,13 @@ def fetch_data(query, cfg):
         if cfg['rm_dupe'] != '':
             df = df.drop_duplicates(subset=cfg['rm_dupe'], keep='first').reset_index()
         df = df[cfg['field'].split(',')]
-        print('  - '+str(df.shape[0])+' result(s) fetched')
+        print('  - '+str(df.shape[0])+' '+cfg['query_type']+' fetched')
         if not os.path.exists(cfg['path_save']):
             os.makedirs(cfg['path_save'])
         df.to_csv(cfg['path_save']+cfg['query_type']+'_'+cfg['save_suffix']+'.csv')
         return df
     except:
-        print('  - 0 result fetched')
+        print('  - 0 '+cfg['query_type']+'(s)'+' fetched')
         df = []
         return df
 
